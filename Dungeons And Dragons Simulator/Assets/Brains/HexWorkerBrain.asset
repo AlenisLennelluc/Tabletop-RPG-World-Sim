@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: HexWorkerBrain
   m_EditorClassIdentifier: 
   brainParameters:
-    vectorObservationSize: 88
+    vectorObservationSize: 233
     numStackedVectorObservations: 5
     vectorActionSize: 07000000
     cameraResolutions: []
     vectorActionDescriptions:
     - 
     vectorActionSpaceType: 0
-  model: {fileID: 5022602860645237092, guid: 82177a6a34d8554499ddf2fb7161d84f, type: 3}
+  model: {fileID: 5022602860645237092, guid: c9084dc7ac47a8b4aa2163a1f25bbcde, type: 3}
   inferenceDevice: 0

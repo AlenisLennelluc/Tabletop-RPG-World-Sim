@@ -85,25 +85,25 @@ public abstract class UnitAgent : Agent
             new Coordinates3D(homeX, homeY), new Coordinates3D(-x, -y));
         AddVectorObs(Sigmoid(coordDist.x));
         AddVectorObs(Sigmoid(coordDist.y));
-       // AddVectorObs(Sigmoid(coordDist.z));
+        AddVectorObs(Sigmoid(coordDist.z));
         AddVectorObs((Sigmoid(attack) - 0.5f) * 2);
     }
 
     public override void AgentReset()
     {
-        if (academy.training)
-        {
-            ResetAgent();
-        }
+        ResetAgent();
     }
 
     public virtual void ResetAgent()
     {
-        dead = false;
+        if (dead)
+        {
+            dead = false;
 
-        Move(gameState.GetHex(new Coordinates2D(homeX, homeY)).GetComponent<Hex>());
+            Move(gameState.GetHex(new Coordinates2D(homeX, homeY)).GetComponent<Hex>());
 
-        Debug.Log("Unit Reset");
+            Debug.Log("Unit Reset");
+        }
     }
 
     public void Move(Hex newHex)
@@ -180,6 +180,7 @@ public abstract class UnitAgent : Agent
                 break;
             case GameState.HexTypes.Water:
                 SetReward(-1f);
+                Dead();
                 Done();
                 Debug.Log("In Water!");
                 break;
@@ -212,6 +213,7 @@ public abstract class UnitAgent : Agent
         else if (attacker.attack >= defender.attack && attacker.attack > 0)
         {
             defender.SetReward(-.1f);
+            defender.Dead();
             defender.Done();
             attacker.SetReward(1f);
             attacker.Done();
@@ -221,6 +223,7 @@ public abstract class UnitAgent : Agent
         else
         {
             attacker.SetReward(-.1f);
+            attacker.Dead();
             attacker.Done();
             Debug.Log("Defender Beat Attacker");
             return false;

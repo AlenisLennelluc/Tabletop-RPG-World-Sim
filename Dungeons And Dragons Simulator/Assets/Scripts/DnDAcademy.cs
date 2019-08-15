@@ -205,6 +205,7 @@ public class DnDAcademy : Academy
         {
             foreach (GameObject agent in team)
             {
+                agent.GetComponent<UnitAgent>().Dead();
                 agent.GetComponent<UnitAgent>().ResetAgent();
             }
         }

@@ -7,7 +7,7 @@ public class WarriorAgent : UnitAgent
     public override void InitializeAgent()
     {
         attack = 1;
-        sight = 2;
+        sight = 3;
         unitType = Warrior;
         base.InitializeAgent();
     }

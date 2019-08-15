@@ -10,7 +10,7 @@ public class WorkerAgent : UnitAgent
     public override void InitializeAgent()
     {
         unitType = Worker;
-        sight = 2;
+        sight = 3;
         base.InitializeAgent();
     }
 
