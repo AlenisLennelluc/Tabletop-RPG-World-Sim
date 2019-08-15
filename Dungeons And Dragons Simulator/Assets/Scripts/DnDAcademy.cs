@@ -17,6 +17,7 @@ public class DnDAcademy : Academy
     public int maxRange;
 
     public bool training;
+    public bool player;
     public GameObject WorkerPrefab;
     public Brain WorkerBrain;
     public GameObject WarriorPrefab;
@@ -111,7 +112,7 @@ public class DnDAcademy : Academy
 
     private void Update()
     {
-        if (!training)
+        if (!training && !player)
         {
             timer += Time.deltaTime;
 
@@ -119,6 +120,19 @@ public class DnDAcademy : Academy
             {
                 Step();
                 timer = 0;
+            }
+        }
+        else if (player) 
+        {
+            if (Input.GetKeyDown("w") ||
+                Input.GetKeyDown("e") ||
+                Input.GetKeyDown("d") ||
+                Input.GetKeyDown("s") ||
+                Input.GetKeyDown("a") ||
+                Input.GetKeyDown("q") ||
+                Input.GetKeyDown("space"))
+            {
+                Step();
             }
         }
     }
