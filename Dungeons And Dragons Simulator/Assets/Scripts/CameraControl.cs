@@ -118,4 +118,9 @@ public class CameraControl : MonoBehaviour {
 			cameraAngle += scroll;
 		}
 	}
+
+    public void UpdatePos(float x, float z)
+    {
+        transform.position = new Vector3(x, transform.position.y, z);
+    }
 }

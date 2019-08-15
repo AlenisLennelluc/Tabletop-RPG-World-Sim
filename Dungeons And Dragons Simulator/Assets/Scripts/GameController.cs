@@ -87,6 +87,8 @@ public class GameController : MonoBehaviour
         gameState.centerX = startingHex.GetX();
         gameState.centerY = startingHex.GetY();
 
+        FindObjectOfType<CameraControl>().UpdatePos(hex.transform.position.x, hex.transform.position.z);
+
 		for (int dx = -range; dx < range - 1; dx++) {
 			for (int dy = Mathf.Max (-range + 1, -dx - range); dy < Mathf.Min (range, -dx + range - 1); dy++) {
 				if (!XYtoHex.ContainsKey (new Coordinates2D (dx + hex.GetX (), dy + hex.GetY ()))) {
