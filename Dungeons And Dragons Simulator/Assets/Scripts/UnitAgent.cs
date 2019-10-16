@@ -24,6 +24,7 @@ public abstract class UnitAgent : Agent
     protected bool dead;
 
     protected int unitType;
+    protected float maxMovePenalty;
 
     public const int Worker = 0;
     public const int Warrior = 1;
@@ -55,6 +56,11 @@ public abstract class UnitAgent : Agent
         }
 
         dead = false;
+
+        if (maxMovePenalty == 0)
+        {
+            maxMovePenalty = -0.3f;
+        }
     }
 
     public override void CollectObservations()
@@ -167,8 +173,8 @@ public abstract class UnitAgent : Agent
         float dist = Mathf.Abs(coordDist.x) + Mathf.Abs(coordDist.y) + Mathf.Abs(coordDist.z);
         dist = dist / 2;
         dist = dist * .05f;
-        dist = dist / (dist + 1);
-        AddReward(Mathf.Min(-dist, 0));
+        dist = (dist - 0.15f) / (dist + 0.85f);
+        AddReward(Mathf.Min(Mathf.Max(-dist, maxMovePenalty), 0));
         //Debug.Log(-dist);
 
         AddReward(-0.02f);

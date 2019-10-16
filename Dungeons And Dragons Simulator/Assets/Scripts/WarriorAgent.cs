@@ -8,6 +8,7 @@ public class WarriorAgent : UnitAgent
     {
         attack = 1;
         sight = 3;
+        maxMovePenalty = -0.02f;
         unitType = Warrior;
         base.InitializeAgent();
     }

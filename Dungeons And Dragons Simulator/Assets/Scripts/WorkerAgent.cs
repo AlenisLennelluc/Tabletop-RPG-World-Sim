@@ -57,8 +57,7 @@ public class WorkerAgent : UnitAgent
                         Debug.Log("Went home with resources");
                         newReward = 0;
                         resources = 0;
-                        SetReward(1f);
-                        Done();
+                        SetReward(newReward);
                     }
                     else
                     {
@@ -68,17 +67,32 @@ public class WorkerAgent : UnitAgent
                 }
                 else if (newReward == 0)
                 {
-                    resources = gameState.GetHex(newPos).GetComponent<Hex>().Gather();
-                    if (resources == 0)
+                    GameState.HexTypes hexType = gameState.GetHex(newPos).GetComponent<Hex>().getType();
+
+                    switch (hexType)
                     {
-                        AddReward(-0.02f);
-                        Debug.Log("Nothing to Harvest");
-                    }
-                    else
-                    {
-                        newReward = 1;
-                        newPos = null;
-                        Debug.Log("Harvested");
+                        case GameState.HexTypes.Jungle:
+                            newReward += 0.4f;
+                            AddReward(0.1f);
+                            resources = gameState.GetHex(newPos).GetComponent<Hex>().Gather();
+                            Debug.Log("Harvested Jungle");
+                            break;
+                        case GameState.HexTypes.Forest:
+                            newReward += 0.3f;
+                            AddReward(0.1f);
+                            resources = gameState.GetHex(newPos).GetComponent<Hex>().Gather();
+                            Debug.Log("Harvested Forest");
+                            break;
+                        case GameState.HexTypes.Grassland:
+                            newReward += 0.3f;
+                            AddReward(0.1f);
+                            resources = gameState.GetHex(newPos).GetComponent<Hex>().Gather();
+                            Debug.Log("Harvested Grass");
+                            break;
+                        default:
+                            AddReward(-0.02f);
+                            Debug.Log("Nothing to Harvest");
+                            break;
                     }
                 }
                 else

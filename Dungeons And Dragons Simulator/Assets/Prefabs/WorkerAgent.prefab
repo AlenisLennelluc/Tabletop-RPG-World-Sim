@@ -48,7 +48,7 @@ MonoBehaviour:
   agentParameters:
     agentCameras: []
     agentRenderTextures: []
-    maxStep: 1000
+    maxStep: 30
     resetOnDone: 1
     onDemandDecision: 1
     numberOfActionsBetweenDecisions: 1

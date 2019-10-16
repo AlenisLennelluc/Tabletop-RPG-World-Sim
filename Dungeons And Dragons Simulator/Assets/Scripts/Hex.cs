@@ -49,11 +49,10 @@ public class Hex : MonoBehaviour
     {
         if (growable)
         {
-            growthTimer += 1;
             switch (hexType)
             {
                 case GameState.HexTypes.Desert:
-                    growthTimer -= 0.5f;
+                    growthTimer += 0.25f;
                     if (growthTimer > 20)
                     {
                         hexType = GameState.HexTypes.Grassland;
@@ -63,6 +62,7 @@ public class Hex : MonoBehaviour
                     }
                     break;
                 case GameState.HexTypes.Grassland:
+                    growthTimer += 0.5f;
                     if (growthTimer > 50 && maxType != GameState.HexTypes.Grassland)
                     {
                         hexType = GameState.HexTypes.Forest;
@@ -72,6 +72,7 @@ public class Hex : MonoBehaviour
                     }
                     break;
                 case GameState.HexTypes.Forest:
+                    growthTimer += 1f;
                     if (growthTimer > 300 && maxType != GameState.HexTypes.Forest)
                     {
                         hexType = GameState.HexTypes.Jungle;
@@ -79,6 +80,9 @@ public class Hex : MonoBehaviour
                         materials[1] = hexTypes[5];
                         GetComponentInChildren<MeshRenderer>().materials = materials;
                     }
+                    break;
+                case GameState.HexTypes.Jungle:
+                    growthTimer += 3f;
                     break;
                 default:
                     break;

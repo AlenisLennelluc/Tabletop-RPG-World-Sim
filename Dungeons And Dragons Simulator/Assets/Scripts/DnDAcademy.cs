@@ -63,7 +63,7 @@ public class DnDAcademy : Academy
 
             gameState = FindObjectOfType(typeof(GameState)) as GameState;
             controller = FindObjectOfType(typeof(GameController)) as GameController;
-            maxRange = 20;
+            maxRange = 25;
 
             resetButton = Instantiate(resetButton);
             resetButton.GetComponentInChildren<Button>().onClick.AddListener(ResetAcademy);
@@ -194,6 +194,7 @@ public class DnDAcademy : Academy
                 UnitAgent unit = member.GetComponent<UnitAgent>();
                 unit.homeX = x;
                 unit.homeY = y;
+                unit.Dead();
             }
 
             castles[i].transform.position = teamLoc.transform.position;
@@ -219,7 +220,6 @@ public class DnDAcademy : Academy
         {
             foreach (GameObject agent in team)
             {
-                agent.GetComponent<UnitAgent>().Dead();
                 agent.GetComponent<UnitAgent>().ResetAgent();
             }
         }
